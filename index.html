@@ -1,49 +1,160 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ennur 🌸</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ennur’ma</title>
+
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Playfair Display', serif; }
+
+    body {
+      background: linear-gradient(135deg, #f8cdda, #fbd3e9);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* START SCREEN */
+    #startScreen {
+      position: fixed;
+      inset: 0;
+      background: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      z-index: 9999;
+      cursor: pointer;
+    }
+
+    /* MAIN CONTENT */
+    #content { display: none; padding: 20px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .photo-box { text-align: center; }
+
+    .photo {
+      width: 100%;
+      max-width: 160px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .photo:active { transform: scale(1.8); z-index: 10; }
+
+    .caption {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #7a003c;
+      font-style: italic;
+    }
+
+    /* NOTE SCREEN */
+    #noteScreen {
+      display: none;
+      padding: 24px;
+      font-size: 16px;
+      color: #4a0033;
+      line-height: 1.6;
+    }
+
+    /* HEARTS */
+    .heart {
+      position: fixed;
+      color: red;
+      font-size: 14px;
+      animation: floatUp 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
 
-<div id="intro">
-  <span>herhangi bir yere tıkla</span>
-</div>
+  <!-- START -->
+  <div id="startScreen">Herhangi bir yere tıkla</div>
 
-<audio id="music" src="music.mp3" loop></audio>
-
-<div id="gallery" class="hidden">
-  <div class="photo top-left">
-    <img src="images/foto1.jpg">
-    <p>Rujunun parlaklığını bahane ederek kendimi öptürüyorum sana...</p>
+  <!-- PHOTOS -->
+  <div id="content">
+    <div class="grid">
+      <div class="photo-box">
+        <img src="images/foto1.jpg" class="photo">
+        <p class="caption">Rujunun parlaklığını bahane ederek kendimi öptürüyorum sana...</p>
+      </div>
+      <div class="photo-box">
+        <img src="images/foto2.jpg" class="photo">
+        <p class="caption">Keşke 2011 yılında olsaydık 🥹 hangi yılda olursak olalım birlikte olalım kurban olduğum</p>
+      </div>
+      <div class="photo-box">
+        <img src="images/foto3.jpg" class="photo">
+        <p class="caption">Telefonun yoktu bana çıkınca yazamazsın diye koşa koşa parka gitmeye çalışıyorum…</p>
+      </div>
+      <div class="photo-box">
+        <img src="images/foto4.jpg" class="photo">
+        <p class="caption">Yapmaya yemin ettiğim o kardan çiçek sırf istedin diye…</p>
+      </div>
+    </div>
   </div>
 
-  <div class="photo top-right">
-    <img src="images/foto2.jpg">
-    <p>Keşke 2011 yılında olsaydık 🥹 hangi yılda olursak olalım birlikte olalım kurban olduğum</p>
+  <!-- NOTE -->
+  <div id="noteScreen">
+    <p>
+      Hiç bir zaman seni kırmak için hareket etmedim ama sonucu bu oldu…<br><br>
+      Seni çok seviyorum özür dilerim…<br><br>
+      Tekrar hayatımıza düzgün bir yelken açabilir miyiz…
+    </p>
   </div>
 
-  <div class="photo bottom-left">
-    <img src="images/foto3.jpg">
-    <p>Telefonun yoktu bana çıkınca yazamazsın diye koşa koşa parka geliyorum… asla unutmayacağım bir gün.</p>
-  </div>
+  <!-- MUSIC -->
+  <audio id="music" src="music.mp3" loop></audio>
 
-  <div class="photo bottom-right">
-    <img src="images/foto4.jpg">
-    <p>İlk kar yağan gün… ilk kar’ımız… senin mutlu oluşunla mutlu olduğum gün.</p>
-  </div>
-</div>
+  <script>
+    const start = document.getElementById('startScreen');
+    const content = document.getElementById('content');
+    const note = document.getElementById('noteScreen');
+    const music = document.getElementById('music');
 
-<div id="note" class="hidden">
-  <div class="note-text">
-    Hiç bir zaman seni kırmak için hareket etmedim ama sonucu bu oldu...
-    <br><br>
-    Seni çok seviyorum. Özür dilerim.
-  </div>
-</div>
+    start.onclick = () => {
+      start.style.display = 'none';
+      content.style.display = 'block';
+      music.volume = 0.3;
+      music.play();
+    };
 
-<script src="script.js"></script>
+    document.body.ondblclick = () => {
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        note.style.display = 'block';
+        startHearts();
+      }
+    };
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerText = "Ennur’m";
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '100vh';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 400);
+    }
+  </script>
+
 </body>
 </html>
