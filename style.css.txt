@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.hidden { display: none; }
+
+#intro {
+  background: black;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+
+#gallery {
+  background: #f6c1d1;
+  height: 100vh;
+  position: relative;
+}
+
+.photo {
+  position: absolute;
+  width: 45%;
+  background: rgba(255,255,255,0.7);
+  border-radius: 15px;
+  padding: 8px;
+}
+
+.photo img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.top-left { top: 5%; left: 5%; }
+.top-right { top: 5%; right: 5%; }
+.bottom-left { bottom: 5%; left: 5%; }
+.bottom-right { bottom: 5%; right: 5%; }
+
+#note {
+  background: #ffd6e8;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.note-text {
+  font-size: 16px;
+  line-height: 1.6;
+}
