@@ -86,8 +86,6 @@
 </head>
 <body>
 
-  
-
   <!-- PHOTOS -->
   <div id="content">
     <div class="grid">
@@ -111,8 +109,8 @@
   </div>
 
   <!-- NOTE -->
-  <div id="noteScreen">
-    <p id="noteText" class="typing">
+  <div id="noteScreen" style="display:none;">
+    <p id="noteText">
 Hiç bir zaman seni kırmak için hareket etmedim ama sonucu bu oldu yaptıklarımın farkına vardım. Seni her şey den çok önemsiyorum hatamın farkındayım sorumluluğu bana ait hepsini halledicem. Seni seviyorum özür dilerim. Kafam dolu olması bahane değil bunu da senden çıkaramam çünkü sana aşığım ama böyle bir hata yaptım ben böyle bir insan değilim normalde sevgilim seni üzdüğüm için çok pişmanım. Birdaha böyle bir hata yapmicam balım.
 
 Sen benim öldükten sonraki 7 dk msın. Sürekli aklımdasın kalbimdeki 4 odacığın hepsi senin için atıyor. Bu kalp senin sevginle hayat buldu seninle hayat bulmaya devam edicek.
@@ -125,23 +123,15 @@ Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum. Tek
     </p>
   </div>
 
-  <!-- MUSIC -->
-  <audio id="music" src="müzik.mp3" loop autoplay></audio>
-
   <script>
-    const start = document.getElementById('startScreen');
     const content = document.getElementById('content');
     const note = document.getElementById('noteScreen');
-    const music = document.getElementById('music');
 
-    
-
-    // MOBİL UYUMLU GEÇİŞ (ÇİFT TIK + UZUN BASMA)
     let tapCount = 0;
-    document.body.addEventListener('click', () => {
+    document.addEventListener('click', () => {
       tapCount++;
-      setTimeout(() => tapCount = 0, 400);
-      if (tapCount === 2 && content.style.display === 'block') {
+      setTimeout(() => tapCount = 0, 350);
+      if (tapCount === 2) {
         content.style.display = 'none';
         note.style.display = 'block';
         startHearts();
@@ -155,11 +145,12 @@ Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum. Tek
         heart.innerHTML = '❤️ <span style="color:#b0003a;font-size:12px">Ennur’m</span>';
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.top = '100vh';
+        heart.style.position = 'fixed';
         heart.style.fontSize = '16px';
+        heart.style.animation = 'floatUp 6s linear';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 6000);
-      }, 350);
-    }, 400);
+      }, 400);
     }
   </script>
 
