@@ -18,22 +18,10 @@
     }
 
     /* START SCREEN */
-    #startScreen {
-      position: fixed;
-      inset: 0;
-      background: black;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      z-index: 9999;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
+    
 
     /* MAIN CONTENT */
-    #content { display: none; padding: 20px; }
+    #content { display: block; padding: 20px; }
 
     .grid {
       display: grid;
@@ -98,8 +86,7 @@
 </head>
 <body>
 
-  <!-- START -->
-  <div id="startScreen">Herhangi bir yere tıkla</div>
+  
 
   <!-- PHOTOS -->
   <div id="content">
@@ -139,7 +126,7 @@ Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum. Tek
   </div>
 
   <!-- MUSIC -->
-  <audio id="music" src="müzik.mp3" loop></audio>
+  <audio id="music" src="müzik.mp3" loop autoplay></audio>
 
   <script>
     const start = document.getElementById('startScreen');
@@ -147,15 +134,7 @@ Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum. Tek
     const note = document.getElementById('noteScreen');
     const music = document.getElementById('music');
 
-    function startSite() {
-      start.style.display = 'none';
-      content.style.display = 'block';
-      music.volume = 0.3;
-      music.play().catch(() => {});
-    }
-
-    start.addEventListener('click', startSite);
-    start.addEventListener('touchstart', startSite);
+    
 
     // MOBİL UYUMLU GEÇİŞ (ÇİFT TIK + UZUN BASMA)
     let tapCount = 0;
