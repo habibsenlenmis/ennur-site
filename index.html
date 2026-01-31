@@ -1,160 +1,139 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ennur’ma</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ennur’ma</title>
 
-  <!-- GOOGLE FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Playfair Display', serif; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Playfair Display',serif}
+body{background:linear-gradient(135deg,#f8cdda,#fbd3e9);min-height:100vh}
+#startScreen{
+position:fixed;inset:0;background:black;color:white;
+display:flex;align-items:center;justify-content:center;
+font-size:22px;z-index:9999;cursor:pointer
+}
+#content{display:none;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.photo-box{text-align:center}
+.photo{
+width:100%;max-width:160px;border-radius:16px;
+cursor:pointer;transition:0.3s
+}
+.photo:active{transform:scale(1.8);z-index:10}
+.caption{margin-top:8px;font-size:13px;color:#7a003c;font-style:italic}
 
-    body {
-      background: linear-gradient(135deg, #f8cdda, #fbd3e9);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* START SCREEN */
-    #startScreen {
-      position: fixed;
-      inset: 0;
-      background: black;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      z-index: 9999;
-      cursor: pointer;
-    }
-
-    /* MAIN CONTENT */
-    #content { display: none; padding: 20px; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .photo-box { text-align: center; }
-
-    .photo {
-      width: 100%;
-      max-width: 160px;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .photo:active { transform: scale(1.8); z-index: 10; }
-
-    .caption {
-      margin-top: 8px;
-      font-size: 13px;
-      color: #7a003c;
-      font-style: italic;
-    }
-
-    /* NOTE SCREEN */
-    #noteScreen {
-      display: none;
-      padding: 24px;
-      font-size: 16px;
-      color: #4a0033;
-      line-height: 1.6;
-    }
-
-    /* HEARTS */
-    .heart {
-      position: fixed;
-      color: red;
-      font-size: 14px;
-      animation: floatUp 6s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-100vh); opacity: 0; }
-    }
-  </style>
+#noteScreen{
+display:none;padding:24px;font-size:16px;
+color:#4a0033;line-height:1.6
+}
+.heart{
+position:fixed;color:red;font-size:14px;
+animation:floatUp 6s linear infinite
+}
+@keyframes floatUp{
+from{transform:translateY(0);opacity:1}
+to{transform:translateY(-100vh);opacity:0}
+}
+</style>
 </head>
+
 <body>
 
-  <!-- START -->
-  <div id="startScreen">Herhangi bir yere tıkla</div>
+<div id="startScreen">Herhangi bir yere tıkla</div>
 
-  <!-- PHOTOS -->
-  <div id="content">
-    <div class="grid">
-      <div class="photo-box">
-        <img src="images/foto1.jpg" class="photo">
-        <p class="caption">Rujunun parlaklığını bahane ederek kendimi öptürüyorum sana...</p>
-      </div>
-      <div class="photo-box">
-        <img src="images/foto2.jpg" class="photo">
-        <p class="caption">Keşke 2011 yılında olsaydık 🥹 hangi yılda olursak olalım birlikte olalım kurban olduğum</p>
-      </div>
-      <div class="photo-box">
-        <img src="images/foto3.jpg" class="photo">
-        <p class="caption">Telefonun yoktu bana çıkınca yazamazsın diye koşa koşa parka gitmeye çalışıyorum…</p>
-      </div>
-      <div class="photo-box">
-        <img src="images/foto4.jpg" class="photo">
-        <p class="caption">Yapmaya yemin ettiğim o kardan çiçek sırf istedin diye…</p>
-      </div>
-    </div>
-  </div>
+<div id="content">
+<div class="grid">
 
-  <!-- NOTE -->
-  <div id="noteScreen">
-    <p>
-      Hiç bir zaman seni kırmak için hareket etmedim ama sonucu bu oldu…<br><br>
-      Seni çok seviyorum özür dilerim…<br><br>
-      Tekrar hayatımıza düzgün bir yelken açabilir miyiz…
-    </p>
-  </div>
+<div class="photo-box">
+<img src="images/foto1.jpg" class="photo">
+<p class="caption">
+Rujunun parlaklığını bahane ederek kendimi öptürüyorum sana...
+</p>
+</div>
 
-  <!-- MUSIC -->
-  <audio id="music" src="music.mp3" loop></audio>
+<div class="photo-box">
+<img src="images/foto2.jpg" class="photo">
+<p class="caption">
+Keşke 2011 yılında olsaydık 🥹 hangi yılda olursak olalım birlikte olalım kurban olduğum
+</p>
+</div>
 
-  <script>
-    const start = document.getElementById('startScreen');
-    const content = document.getElementById('content');
-    const note = document.getElementById('noteScreen');
-    const music = document.getElementById('music');
+<div class="photo-box">
+<img src="images/foto3.jpg" class="photo">
+<p class="caption">
+Telefonun yoktu bana çıkınca yazamazsin diye koşa koşa parka gitmeye çalışıyorum
+aklım sadece sende çıktım diyorsun telefonu kaçırdım diyorsun hiç ama hiç
+beklemediğim bir anda şok geçirdim sevgilim asla unutmayacağım bir gün...
+</p>
+</div>
 
-    start.onclick = () => {
-      start.style.display = 'none';
-      content.style.display = 'block';
-      music.volume = 0.3;
-      music.play();
-    };
+<div class="photo-box">
+<img src="images/foto4.jpg" class="photo">
+<p class="caption">
+Yapmaya yemin ettiğim o kardan çiçek sırf istedin diye...
+O güzel gülüşünü bol bol duyduğum senin mutlu oluşunla mutlu olduğum
+ilk kar yağan gün ilk karımız...
+</p>
+</div>
 
-    document.body.ondblclick = () => {
-      if (content.style.display === 'block') {
-        content.style.display = 'none';
-        note.style.display = 'block';
-        startHearts();
-      }
-    };
+</div>
+</div>
 
-    function startHearts() {
-      setInterval(() => {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerText = "Ennur’m";
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.top = '100vh';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-      }, 400);
-    }
-  </script>
+<div id="noteScreen">
+<p>
+Hiç bir zaman seni kırmak için hareket etmedim ama sonucu bu oldu yaptıklarımın farkına vardım.
+Seni her şey den çok önemsiyorum hatamın farkındayım sorumluluğu bana ait hepsini halledicem.
+Seni seviyorum özür dilerim. Kafam dolu olması bahane değil bunu da senden çıkaramam çünkü
+sana aşığım ama böyle bir hata yaptım ben böyle bir insan değilim normalde sevgilim seni
+üzdüğüm için çok pişmanım. Birdaha böyle bir hata yapmicam balım.
+<br><br>
+Sen benim öldükten sonraki 7 dk msın. Sürekli aklımdasın kalbimdeki 4 odacığın hepsi senin için atıyor.
+Bu kalp senin sevginle hayat buldu seninle hayat bulmaya devam edicek.
+Sana erkek sözü verdim ölene kadar seni seveceğim diye asla bu sözden caymayacağım
+seni de aşkımla hep mutlu edeceğim birlikte sınavdan hayallerimizi başararak
+hayatımıza devam edeceğiz söz veriyorum.
+<br><br>
+Sana hala çok çok aşığım bu aşk her gün artıyor artmaya da devam edicek
+o güzel kalbindeki kırıkları düzeltmek beni sorumluluğumda aşkım tüm kalbimde söz veriyorum.
+Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum.
+Tekrar hayatımıza düzgün bir yelken açabilirmiyiz...
+</p>
+</div>
+
+<audio id="music" src="müzik.mp3" loop></audio>
+
+<script>
+const start=document.getElementById("startScreen");
+const content=document.getElementById("content");
+const note=document.getElementById("noteScreen");
+const music=document.getElementById("music");
+
+start.onclick=()=>{
+start.style.display="none";
+content.style.display="block";
+music.volume=0.3;
+music.play();
+};
+
+document.body.ondblclick=()=>{
+if(content.style.display==="block"){
+content.style.display="none";
+note.style.display="block";
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerText="Ennur’m";
+h.style.left=Math.random()*100+"vw";
+h.style.top="100vh";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},400);
+}
+};
+</script>
 
 </body>
 </html>
