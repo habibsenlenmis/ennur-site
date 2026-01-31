@@ -29,6 +29,7 @@
       font-size: 22px;
       z-index: 9999;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     /* MAIN CONTENT */
@@ -146,12 +147,15 @@ Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum. Tek
     const note = document.getElementById('noteScreen');
     const music = document.getElementById('music');
 
-    start.onclick = () => {
+    function startSite() {
       start.style.display = 'none';
       content.style.display = 'block';
       music.volume = 0.3;
       music.play().catch(() => {});
-    };
+    }
+
+    start.addEventListener('click', startSite);
+    start.addEventListener('touchstart', startSite);
 
     // MOBİL UYUMLU GEÇİŞ (ÇİFT TIK + UZUN BASMA)
     let tapCount = 0;
