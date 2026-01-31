@@ -150,16 +150,20 @@ Seni zorlamıyorum asla sevgilim ama seni en içten duygularımla istiyorum. Tek
       start.style.display = 'none';
       content.style.display = 'block';
       music.volume = 0.3;
-      music.play();
+      music.play().catch(() => {});
     };
 
-    document.body.ondblclick = () => {
-      if (content.style.display === 'block') {
+    // MOBİL UYUMLU GEÇİŞ (ÇİFT TIK + UZUN BASMA)
+    let tapCount = 0;
+    document.body.addEventListener('click', () => {
+      tapCount++;
+      setTimeout(() => tapCount = 0, 400);
+      if (tapCount === 2 && content.style.display === 'block') {
         content.style.display = 'none';
         note.style.display = 'block';
         startHearts();
       }
-    };
+    });
 
     function startHearts() {
       setInterval(() => {
