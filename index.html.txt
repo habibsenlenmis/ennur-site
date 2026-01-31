@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ennur 🌸</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="intro">
+  <span>herhangi bir yere tıkla</span>
+</div>
+
+<audio id="music" src="music.mp3" loop></audio>
+
+<div id="gallery" class="hidden">
+  <div class="photo top-left">
+    <img src="images/foto1.jpg">
+    <p>Rujunun parlaklığını bahane ederek kendimi öptürüyorum sana...</p>
+  </div>
+
+  <div class="photo top-right">
+    <img src="images/foto2.jpg">
+    <p>Keşke 2011 yılında olsaydık 🥹 hangi yılda olursak olalım birlikte olalım kurban olduğum</p>
+  </div>
+
+  <div class="photo bottom-left">
+    <img src="images/foto3.jpg">
+    <p>Telefonun yoktu bana çıkınca yazamazsın diye koşa koşa parka geliyorum… asla unutmayacağım bir gün.</p>
+  </div>
+
+  <div class="photo bottom-right">
+    <img src="images/foto4.jpg">
+    <p>İlk kar yağan gün… ilk kar’ımız… senin mutlu oluşunla mutlu olduğum gün.</p>
+  </div>
+</div>
+
+<div id="note" class="hidden">
+  <div class="note-text">
+    Hiç bir zaman seni kırmak için hareket etmedim ama sonucu bu oldu...
+    <br><br>
+    Seni çok seviyorum. Özür dilerim.
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
